@@ -46,6 +46,9 @@ class BLEScannerApp(App[None]):
     ]
 
     address_filter = reactive("")  #: :meta private:
+    name_filter = reactive("")  #: :meta private:
+    uuid_filter = reactive("")  #: :meta private:
+    manufacturer_filter = reactive("")  #: :meta private:
 
     def __init__(self, cli_args: Namespace) -> None:
         """Initialize BLE scanner.
@@ -128,7 +131,7 @@ class BLEScannerApp(App[None]):
         yield Header()
         yield Footer()
         yield SettingsWidget(id="sidebar")
-        yield FilterWidget(placeholder="address=")
+        yield FilterWidget(placeholder="address=, name=, uuid=, manufacturer=")
         yield DataTable(zebra_stripes=True)
 
     def show_data_config(self) -> dict[str, bool]:
@@ -207,11 +210,65 @@ class BLEScannerApp(App[None]):
         """
         if message.value.startswith("address="):
             self.address_filter = message.value[8:].upper()
+            self.name_filter = ""
+            self.uuid_filter = ""
+            self.manufacturer_filter = ""
+        elif message.value.startswith("name="):
+            self.address_filter = ""
+            self.name_filter = message.value[5:]
+            self.uuid_filter = ""
+            self.manufacturer_filter = ""
+        elif message.value.startswith("uuid="):
+            self.address_filter = ""
+            self.name_filter = ""
+            self.uuid_filter = message.value[5:].upper()
+            self.manufacturer_filter = ""
+        elif message.value.startswith("manufacturer="):
+            self.address_filter = ""
+            self.name_filter = ""
+            self.uuid_filter = ""
+            self.manufacturer_filter = message.value[13:].upper()
         else:
             self.address_filter = ""
+            self.name_filter = ""
+            self.uuid_filter = ""
+            self.manufacturer_filter = ""
 
     def watch_address_filter(self, old_filter: str, new_filter: str) -> None:
         """React when the reactive attribute address_filter changes.
+
+        This recreates the table.
+
+        Args:
+            old_filter (str): The old value of the filter.
+            new_filter (str): The new value of the filter.
+        """
+        self.recreate_table()
+
+    def watch_name_filter(self, old_filter: str, new_filter: str) -> None:
+        """React when the reactive attribute name_filter changes.
+
+        This recreates the table.
+
+        Args:
+            old_filter (str): The old value of the filter.
+            new_filter (str): The new value of the filter.
+        """
+        self.recreate_table()
+
+    def watch_uuid_filter(self, old_filter: str, new_filter: str) -> None:
+        """React when the reactive attribute uuid_filter changes.
+
+        This recreates the table.
+
+        Args:
+            old_filter (str): The old value of the filter.
+            new_filter (str): The new value of the filter.
+        """
+        self.recreate_table()
+
+    def watch_manufacturer_filter(self, old_filter: str, new_filter: str) -> None:
+        """React when the reactive attribute manufacturer_filter changes.
 
         This recreates the table.
 
@@ -254,7 +311,38 @@ class BLEScannerApp(App[None]):
             device_address (RichDeviceAddress): The device address.
             rich_advertisement (RichAdvertisement): The advertisement.
         """
-        if device_address.address.startswith(self.address_filter):
+        # Check if advertisement matches all active filters
+        show = True
+        
+        # Address filter
+        if self.address_filter and not device_address.address.startswith(self.address_filter):
+            show = False
+        
+        # Name filter
+        if self.name_filter and self.name_filter not in (rich_advertisement.data.local_name or ""):
+            show = False
+        
+        # UUID filter
+        if self.uuid_filter:
+            uuid_match = False
+            for uuid in rich_advertisement.data.service_uuids:
+                if self.uuid_filter in uuid.upper():
+                    uuid_match = True
+                    break
+            if not uuid_match:
+                show = False
+        
+        # Manufacturer filter
+        if self.manufacturer_filter:
+            manufacturer_match = False
+            for cic in rich_advertisement.data.manufacturer_data.keys():
+                if self.manufacturer_filter in f"{cic:04X}":
+                    manufacturer_match = True
+                    break
+            if not manufacturer_match:
+                show = False
+        
+        if show:
             table.add_row(
                 now,
                 device_address,
