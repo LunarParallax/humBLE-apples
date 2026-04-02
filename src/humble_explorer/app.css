@@ -80,6 +80,11 @@ DataTable > .datatable--hover {
     text-style: underline;
 }
 
+DataTable > .datatable--hover {
+    background: #001a00;
+    color: #00ff41;
+}
+
 Input {
     background: #0d1117;
     color: #00ff41;
@@ -92,6 +97,12 @@ Input:focus {
     color: #00ff41;
     border: double #00ff41;
     text-style: bold;
+}
+
+Input:focus {
+    background: #0d1117;
+    color: #00ff41;
+    border: double #00ff41;
 }
 
 Input > .input--cursor {
