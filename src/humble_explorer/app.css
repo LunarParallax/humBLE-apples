@@ -53,10 +53,21 @@ DataTable > .datatable--cursor {
     color: #0d1117;
 }
 
+DataTable > .datatable--hover {
+    background: #001a00;
+    color: #00ff41;
+}
+
 Input {
     background: #0d1117;
     color: #00ff41;
     border: solid #00ff41;
+}
+
+Input:focus {
+    background: #0d1117;
+    color: #00ff41;
+    border: double #00ff41;
 }
 
 Input > .input--cursor {
@@ -88,4 +99,74 @@ Switch:on -switch--slider {
 .title {
     color: #0d1117;
     text-style: bold;
+}
+
+/* Enhanced Cyberpunk Effects */
+Button {
+    background: #003b00;
+    color: #00ff41;
+    border: solid #00ff41;
+}
+
+Button:hover {
+    background: #00ff41;
+    color: #0d1117;
+    text-style: bold;
+}
+
+Button:focus {
+    border: double #00ff41;
+}
+
+Label {
+    color: #00ff41;
+}
+
+Static {
+    color: #00ff41;
+}
+
+/* Scrollbar Styling */
+ScrollBar {
+    background: #0a0f0a;
+}
+
+ScrollBar > .bar {
+    background: #001a00;
+}
+
+ScrollBar > .bar--hover {
+    background: #003b00;
+}
+
+ScrollBar > .handle {
+    background: #00ff41;
+}
+
+ScrollBar > .handle--hover {
+    background: #00ff41;
+    color: #0d1117;
+}
+
+/* Selection highlighting */
+DataTable > .datatable--selected {
+    background: #00ff41;
+    color: #0d1117;
+    text-style: bold;
+}
+
+/* Toast notifications */
+Toast {
+    background: #003b00;
+    color: #00ff41;
+    border: solid #00ff41;
+}
+
+/* Modal dialogs */
+Modal {
+    background: rgba(10, 15, 10, 0.8);
+}
+
+Container {
+    border: solid #00ff41;
 }
