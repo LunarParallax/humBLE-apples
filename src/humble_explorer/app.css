@@ -26,37 +26,72 @@ Screen {
     background: #0d1117;
 }
 
+/* Scanline effect overlay */
+Screen::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 255, 65, 0.03) 0%,
+        transparent 50%,
+        rgba(0, 255, 65, 0.03) 100%
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
 Header {
     background: #00ff41;
     color: #0d1117;
     text-style: bold;
+    border-bottom: double #00ff41;
 }
 
 Footer {
     background: #003b00;
     color: #00ff41;
+    border-top: solid #00ff41;
 }
 
 DataTable {
     background: #0a0f0a;
     color: #00ff41;
+    border: solid #003b00;
 }
 
 DataTable > .datatable--header {
     background: #003b00;
     color: #00ff41;
     text-style: bold;
+    border-bottom: solid #00ff41;
 }
 
 DataTable > .datatable--cursor {
     background: #00ff41;
     color: #0d1117;
+    text-style: bold;
+}
+
+DataTable > .datatable--hover {
+    background: #001a00;
+    color: #00ff41;
+    text-style: underline;
 }
 
 Input {
     background: #0d1117;
     color: #00ff41;
     border: solid #00ff41;
+    text-style: bold;
+}
+
+Input:focus {
+    background: #0d1117;
+    color: #00ff41;
+    border: double #00ff41;
+    text-style: bold;
 }
 
 Input > .input--cursor {
@@ -66,6 +101,7 @@ Input > .input--cursor {
 
 Switch {
     background: #003b00;
+    border: solid #00ff41;
 }
 
 Switch -switch--slider {
@@ -82,10 +118,143 @@ Switch:on -switch--slider {
 
 #sidebar {
     background: #0a0f0a;
-    border-right: solid #00ff41;
+    border-right: double #00ff41;
 }
 
 .title {
     color: #0d1117;
     text-style: bold;
+}
+
+/* Enhanced Cyberpunk Effects */
+Button {
+    background: #003b00;
+    color: #00ff41;
+    border: solid #00ff41;
+    text-style: bold;
+}
+
+Button:hover {
+    background: #00ff41;
+    color: #0d1117;
+    text-style: bold;
+    border: double #00ff41;
+}
+
+Button:focus {
+    border: double #00ff41;
+    text-style: bold;
+}
+
+Button:disabled {
+    background: #001a00;
+    color: #003b00;
+    border: dashed #003b00;
+}
+
+Label {
+    color: #00ff41;
+    text-style: bold;
+}
+
+Static {
+    color: #00ff41;
+}
+
+/* Scrollbar Styling */
+ScrollBar {
+    background: #0a0f0a;
+    border: solid #003b00;
+}
+
+ScrollBar > .bar {
+    background: #001a00;
+}
+
+ScrollBar > .bar--hover {
+    background: #003b00;
+}
+
+ScrollBar > .handle {
+    background: #00ff41;
+    border: solid #0d1117;
+}
+
+ScrollBar > .handle--hover {
+    background: #00ff41;
+    color: #0d1117;
+    border: double #0d1117;
+}
+
+/* Selection highlighting */
+DataTable > .datatable--selected {
+    background: #00ff41;
+    color: #0d1117;
+    text-style: bold;
+    border: solid #0d1117;
+}
+
+/* Toast notifications */
+Toast {
+    background: #003b00;
+    color: #00ff41;
+    border: double #00ff41;
+    text-style: bold;
+}
+
+/* Modal dialogs */
+Modal {
+    background: rgba(10, 15, 10, 0.9);
+    border: double #00ff41;
+}
+
+Container {
+    border: solid #00ff41;
+    background: #0a0f0a;
+}
+
+/* Widget-specific enhancements */
+FilterWidget {
+    border: solid #00ff41;
+    background: #0d1117;
+}
+
+SettingsWidget {
+    border-right: double #00ff41;
+    background: #0a0f0a;
+}
+
+/* Status indicators */
+.status-active {
+    color: #00ff41;
+    text-style: bold;
+}
+
+.status-inactive {
+    color: #003b00;
+}
+
+/* Glow effects for active elements */
+.auto-scroll-active {
+    text-style: bold;
+    color: #00ff41;
+}
+
+/* Terminal-like borders */
+.border-cyber {
+    border: double #00ff41;
+}
+
+.border-subtle {
+    border: solid #003b00;
+}
+
+/* Text emphasis */
+.text-glow {
+    text-style: bold;
+    color: #00ff41;
+}
+
+.text-dim {
+    color: #003b00;
 }
