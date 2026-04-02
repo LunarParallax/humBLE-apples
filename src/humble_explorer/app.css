@@ -1,6 +1,8 @@
 #sidebar {
     dock: left;
     width: auto;
+    background: $surface;
+    border-right: wide $primary;
 }
 
 .container {
@@ -17,4 +19,73 @@ Switch {
     height: 3;
     content-align: center middle;
     width: auto;
+}
+
+/* Matrix/Cyberpunk Theme */
+Screen {
+    background: #0d1117;
+}
+
+Header {
+    background: #00ff41;
+    color: #0d1117;
+    text-style: bold;
+}
+
+Footer {
+    background: #003b00;
+    color: #00ff41;
+}
+
+DataTable {
+    background: #0a0f0a;
+    color: #00ff41;
+}
+
+DataTable > .datatable--header {
+    background: #003b00;
+    color: #00ff41;
+    text-style: bold;
+}
+
+DataTable > .datatable--cursor {
+    background: #00ff41;
+    color: #0d1117;
+}
+
+Input {
+    background: #0d1117;
+    color: #00ff41;
+    border: solid #00ff41;
+}
+
+Input > .input--cursor {
+    background: #00ff41;
+    color: #0d1117;
+}
+
+Switch {
+    background: #003b00;
+}
+
+Switch -switch--slider {
+    background: #00ff41;
+}
+
+Switch:on {
+    background: #00ff41;
+}
+
+Switch:on -switch--slider {
+    background: #0d1117;
+}
+
+#sidebar {
+    background: #0a0f0a;
+    border-right: solid #00ff41;
+}
+
+.title {
+    color: #0d1117;
+    text-style: bold;
 }
